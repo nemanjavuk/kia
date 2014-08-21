@@ -7,9 +7,7 @@ import java.util.List;
  */
 public interface HighScores {
 
-    public void putScore(Integer level, Integer userId, Integer score);
+    public void putScore(Integer level, Score score);
 
-    //test
-    // should return Score objects
-    public List<Object> getHighScores(Integer level);
+    public List<Score> getHighScores(Integer level);
 }
