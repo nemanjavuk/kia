@@ -9,6 +9,7 @@ public interface HighScores {
 
     public void putScore(Integer level, Integer userId, Integer score);
 
+    //test
     // should return Score objects
     public List<Object> getHighScores(Integer level);
 }

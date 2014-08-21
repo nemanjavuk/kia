@@ -6,7 +6,7 @@ import com.king.data.HighScoresImpl;
 /**
  * Created by nemanja on 8/21/14.
  */
-public class Main {
+public class Main {//test
 
     public static void main(String[] args) {
         HighScores hs = HighScoresImpl.INSTANCE;

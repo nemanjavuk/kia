@@ -21,7 +21,7 @@ public enum HighScoresImpl implements HighScores {
 
     @Override
     public List<Object> getHighScores(Integer level) {
-        return new ArrayList<Object>();
+        return new ArrayList<Object>();//test comment
     }
 
     HighScoresImpl() {
