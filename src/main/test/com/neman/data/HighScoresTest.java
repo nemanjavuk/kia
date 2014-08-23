@@ -43,8 +43,7 @@ public class HighScoresTest {
 
         List<Score> scoresArr = hs.getHighScores(1, 15);
 
-        System.out.println(hs.getHighScoresCSV(1, 15));
-
+        Assert.assertEquals("3=50,19=35,18=34,17=33,16=32,15=31,14=30,13=29,12=28,11=27,10=26,9=25,8=24,7=23,6=22", hs.getHighScoresCSV(1, 15));
         Assert.assertEquals(15, scoresArr.size());
         Assert.assertEquals(50, (int) ((Score) scoresArr.get(0)).getScore());
         Assert.assertEquals(3, (int) ((Score) scoresArr.get(0)).getUserId());

@@ -23,12 +23,12 @@ public class ParamsFilter extends Filter {
         chain.doFilter(httpExchange);
     }
 
-    private void parseGetParams(HttpExchange exchange) throws UnsupportedEncodingException {
+    private void parseGetParams(HttpExchange httpExchange) throws UnsupportedEncodingException {
         Map<String, Object> parameters = new HashMap<String, Object>();
-        URI requestedUri = exchange.getRequestURI();
+        URI requestedUri = httpExchange.getRequestURI();
         String query = requestedUri.getRawQuery();
         parseQuery(query, parameters);
-        exchange.setAttribute("parameters", parameters);
+        httpExchange.setAttribute("parameters", parameters);
     }
 
     private void parsePostParams(HttpExchange exchange)
@@ -83,7 +83,7 @@ public class ParamsFilter extends Filter {
 
     @Override
     public String description() {
-        return "Parses the requested URI for parameters";
+        return "Parses the URI to extract parameters";
     }
 
 }
