@@ -1,7 +1,6 @@
 package com.neman.server.handler;
 
 import com.neman.data.HighScores;
-import com.neman.data.HighScoresImpl;
 import com.neman.utils.IOUtils;
 import com.sun.net.httpserver.Headers;
 import com.sun.net.httpserver.HttpExchange;
@@ -14,6 +13,12 @@ import java.util.regex.Pattern;
 
 public class HighScoresHandler extends AbstractHandler {
 
+    private final HighScores highScores;
+
+    public HighScoresHandler(HighScores highScores) {
+        this.highScores = highScores;
+    }
+
     @Override
     public void handle(HttpExchange httpExchange) {
         Headers responseHeaders = httpExchange.getResponseHeaders();
@@ -23,8 +28,7 @@ public class HighScoresHandler extends AbstractHandler {
 
             int level = getLevel(httpExchange);
             if (level != -1) {
-                HighScores hs = HighScoresImpl.INSTANCE;
-                String csv = hs.getHighScoresCSV(level, 15);
+                String csv = highScores.getHighScoresCSV(level, 15);
                 if (csv.isEmpty()) {
                     httpExchange.sendResponseHeaders(204, -1);
                 } else {

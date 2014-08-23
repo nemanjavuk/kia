@@ -1,10 +1,8 @@
 package com.neman.server.handler;
 
 import com.neman.data.HighScores;
-import com.neman.data.HighScoresImpl;
 import com.neman.data.Score;
 import com.neman.session.SessionManager;
-import com.neman.session.SessionManagerImpl;
 import com.neman.utils.IOUtils;
 import com.sun.net.httpserver.Headers;
 import com.sun.net.httpserver.HttpExchange;
@@ -16,12 +14,20 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class InsertScoreHandler extends AbstractHandler {
+
+    private final HighScores highScores;
+    private final SessionManager sessionManager;
+
+    public InsertScoreHandler(SessionManager sessionManager, HighScores highScores) {
+        this.sessionManager = sessionManager;
+        this.highScores = highScores;
+    }
+
     @Override
     public void handle(HttpExchange httpExchange) {
         String sessionKey = getSessionKey(httpExchange);
         int level = getLevel(httpExchange);
         int score = getScore(httpExchange);
-        SessionManager sessionManager = SessionManagerImpl.getInstance();
         int userId = sessionManager.getUserId(sessionKey);
 
         Headers responseHeaders = httpExchange.getResponseHeaders();
@@ -29,8 +35,7 @@ public class InsertScoreHandler extends AbstractHandler {
         try {
             responseHeaders.set("Content-Type", "text/plain");
             if (userId != -1 && level != -1 && score != -1) {
-                HighScores hs = HighScoresImpl.INSTANCE;
-                hs.putScore(level, new Score(userId, score));
+                highScores.putScore(level, new Score(userId, score));
                 httpExchange.sendResponseHeaders(200, 0);
                 responseBody.close();
             } else {

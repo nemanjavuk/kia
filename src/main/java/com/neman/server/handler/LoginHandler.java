@@ -11,6 +11,12 @@ import java.io.OutputStream;
 
 public class LoginHandler extends AbstractHandler {
 
+    private final SessionManager sessionManager;
+
+    public LoginHandler(SessionManager sessionManager) {
+        this.sessionManager = sessionManager;
+    }
+
     @Override
     public void handle(HttpExchange httpExchange) {
         String sessionKey = login(httpExchange);
@@ -28,7 +34,6 @@ public class LoginHandler extends AbstractHandler {
 
     private String login(HttpExchange httpExchange) {
         int userId = getUserId(httpExchange);
-        SessionManager sessionManager = SessionManagerImpl.getInstance();
         return sessionManager.getSessionKey(userId);
     }
 

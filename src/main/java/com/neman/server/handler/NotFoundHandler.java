@@ -10,7 +10,6 @@ import java.io.OutputStream;
 public class NotFoundHandler extends AbstractHandler {
     @Override
     public void handle(HttpExchange httpExchange) {
-        System.out.println("going to not found handler");
         Headers responseHeaders = httpExchange.getResponseHeaders();
         OutputStream responseBody = httpExchange.getResponseBody();
         responseHeaders.set("Content-Type", "text/plain");

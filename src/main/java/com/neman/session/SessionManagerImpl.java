@@ -15,6 +15,7 @@ public class SessionManagerImpl implements SessionManager {
         userIds = new ConcurrentHashMap<String, Integer>();
     }
 
+    //double check approach to creating Singleton
     public static SessionManagerImpl getInstance() {
         if (null == instance) {
             synchronized (SessionManager.class) {
