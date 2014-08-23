@@ -84,6 +84,9 @@ public enum HighScoresImpl implements HighScores {
         return scores;
     }
 
+    public void clear() {
+        highScores = new ConcurrentHashMap<Integer, ConcurrentHashMap<Integer, Score>>();
+    }
 
     HighScoresImpl() {
         highScores = new ConcurrentHashMap<Integer, ConcurrentHashMap<Integer, Score>>();

@@ -7,7 +7,7 @@ import com.sun.net.httpserver.HttpExchange;
 import java.io.IOException;
 import java.io.OutputStream;
 
-public class NotFoundHandler extends AbstractHandler {
+public class ResourceNotFoundHandler extends AbstractHandler {
     @Override
     public void handle(HttpExchange httpExchange) {
         Headers responseHeaders = httpExchange.getResponseHeaders();

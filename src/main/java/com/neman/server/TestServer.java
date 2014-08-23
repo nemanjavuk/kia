@@ -1,4 +1,4 @@
-package main.java.com.neman.server;
+package com.neman.server;
 
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
@@ -91,12 +91,11 @@ class TestHandler implements HttpHandler {
         exchange.sendResponseHeaders(200, response.length());
         OutputStream os = exchange.getResponseBody();
         os.write(response.getBytes());
-        os.flush();
         os.close();
     }
 }
 
-/* Responds to a JVM shutdown by stopping the main.java.com.neman.server. */
+/* Responds to a JVM shutdown by stopping the com.neman.server. */
 class OnShutdown extends Thread {
     public void run() {
         TestServer.shutdown();

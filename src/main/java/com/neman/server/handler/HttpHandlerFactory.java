@@ -39,6 +39,6 @@ public class HttpHandlerFactory {
             }
         }
 
-        return new NotFoundHandler();
+        return new ResourceNotFoundHandler();
     }
 }

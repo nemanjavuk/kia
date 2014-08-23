@@ -1,4 +1,4 @@
-package com.neman.server;
+package com.neman.utils;
 
 import java.math.BigInteger;
 import java.security.SecureRandom;
