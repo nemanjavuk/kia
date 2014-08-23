@@ -44,9 +44,7 @@ public class InsertScoreHandler extends AbstractHandler {
         }
     }
 
-
-    @Override
-    public int getLevel(HttpExchange httpExchange) {
+    private int getLevel(HttpExchange httpExchange) {
         URI uri = httpExchange.getRequestURI();
         String path = uri.getPath();
 

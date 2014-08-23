@@ -5,7 +5,6 @@ import com.neman.session.SessionManagerImpl;
 import com.neman.utils.IOUtils;
 import com.sun.net.httpserver.Headers;
 import com.sun.net.httpserver.HttpExchange;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -33,9 +32,4 @@ public class LoginHandler extends AbstractHandler {
         return sessionManager.getSessionKey(userId);
     }
 
-
-    @Override
-    public int getLevel(HttpExchange httpExchange) {
-        throw new NotImplementedException();
-    }
 }

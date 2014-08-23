@@ -25,11 +25,14 @@ public class HighScoresHandler extends AbstractHandler {
             if (level != -1) {
                 HighScores hs = HighScoresImpl.INSTANCE;
                 String csv = hs.getHighScoresCSV(level, 15);
-                httpExchange.sendResponseHeaders(200, csv.getBytes().length);
+                if (csv.isEmpty()) {
+                    httpExchange.sendResponseHeaders(204, -1);
+                } else {
+                    httpExchange.sendResponseHeaders(200, csv.getBytes().length);
+                }
                 responseBody.write(csv.getBytes());
                 responseBody.close();
             } else {
-                System.out.println("something bad");
                 httpExchange.sendResponseHeaders(400, 0);
                 responseBody.close();
             }
@@ -38,8 +41,7 @@ public class HighScoresHandler extends AbstractHandler {
         }
     }
 
-    @Override
-    public int getLevel(HttpExchange httpExchange) {
+    private int getLevel(HttpExchange httpExchange) {
         URI uri = httpExchange.getRequestURI();
         String path = uri.getPath();
 

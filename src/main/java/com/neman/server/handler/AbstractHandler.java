@@ -10,8 +10,6 @@ import java.util.regex.Pattern;
 
 public abstract class AbstractHandler implements HttpHandler {
 
-    public abstract int getLevel(HttpExchange httpExchange);
-
     public String getSessionKey(HttpExchange httpExchange) {
         return getParam(httpExchange, "sessionkey");
     }

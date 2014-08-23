@@ -13,22 +13,28 @@ public class HttpHandlerFactory {
         String method = httpExchange.getRequestMethod();
         String path = uri.getPath();
 
-//        Pattern pattern = Pattern.compile("/(\\d+)/(?<pathel>.*)");
-        Pattern pattern = Pattern.compile("/(\\d+)/(?<verb>.*)");
+        Pattern pattern = Pattern.compile("/(\\d+)/(?<pathel>.*)");
         Matcher matcher = pattern.matcher(path);
 
         String pathEl = "";
 
         if (matcher.find()) {
-            pathEl = matcher.group("verb");
+            pathEl = matcher.group("pathel");
         }
 
-        if ("login".equalsIgnoreCase(pathEl) && "get".equalsIgnoreCase(method)) {
-            return new LoginHandler();
-        } else if ("score".equalsIgnoreCase(pathEl) && "post".equalsIgnoreCase(method)) {
-            return new InsertScoreHandler();
-        } else if ("highscorelist".equalsIgnoreCase(pathEl) && "get".equalsIgnoreCase(method)) {
-            return new HighScoresHandler();
+        if ("get".equalsIgnoreCase(method)) {
+            if ("login".equalsIgnoreCase(pathEl)) {
+                return new LoginHandler();
+            }
+            if ("highscorelist".equalsIgnoreCase(pathEl)) {
+                return new HighScoresHandler();
+            }
+        }
+
+        if ("post".equalsIgnoreCase(method)) {
+            if ("score".equalsIgnoreCase(pathEl)) {
+                return new InsertScoreHandler();
+            }
         }
 
         return new NotFoundHandler();

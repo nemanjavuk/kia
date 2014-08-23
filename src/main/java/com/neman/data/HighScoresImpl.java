@@ -3,7 +3,7 @@ package com.neman.data;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentSkipListMap;
+import java.util.concurrent.ConcurrentSkipListSet;
 
 /**
  * Created by nemanja on 8/21/14.
@@ -12,14 +12,13 @@ public enum HighScoresImpl implements HighScores {
     INSTANCE;
 
     //make it final?
-    //level -> (user, score)
-    private ConcurrentHashMap<Integer, ConcurrentSkipListMap<Integer, Score>> highScores;
+    //level -> score -> userId
+    private ConcurrentHashMap<Integer, ConcurrentHashMap<Integer, Score>> highScores;
 
     @Override
     public void putScore(int level, Score score) {
-        System.out.println("trying to insert " + level + " " + score);
         if (highScores.containsKey(level)) {
-            ConcurrentSkipListMap<Integer, Score> scoresForLvl = highScores.get(level);
+            ConcurrentHashMap<Integer, Score> scoresForLvl = highScores.get(level);
             if (scoresForLvl.containsKey(score.getUserId())) {
                 Integer userId = score.getUserId();
                 Integer newScore = score.getScore();
@@ -30,47 +29,64 @@ public enum HighScoresImpl implements HighScores {
                 highScores.get(level).put(score.getUserId(), score);
             }
         } else {
-            ConcurrentSkipListMap<Integer, Score> scores = new ConcurrentSkipListMap<Integer, Score>(); //TODO:nemanja:is it a good idea?
+            ConcurrentHashMap<Integer, Score> scores = new ConcurrentHashMap<Integer, Score>();
             scores.put(score.getUserId(), score);
             highScores.put(level, scores);
         }
     }
 
     @Override
-    public ArrayList<Score> getHighScores(int level, int limit) {
-        ConcurrentSkipListMap<Integer, Score> scoresForLevel = highScores.get(level);
-        System.out.println(scoresForLevel);
-        ArrayList<Score> scorez = new ArrayList<Score>();
-        int index = 0;
-        for (Map.Entry<Integer, Score> scoreEntry : scoresForLevel.entrySet()) {
-            if (index >= limit) {
-                return scorez;
-            }
-            System.out.println("adding " + scoreEntry.getValue());
-            scorez.add(scoreEntry.getValue());
-            index++;
-        }
-        return scorez;
-    }
-
-    @Override
     public String getHighScoresCSV(int level, int limit) {
-        ArrayList<Score> highScores = getHighScores(level, limit);
-        System.out.println("highscores " + highScores);
+        if (highScores.get(level) == null) {
+            return "";
+        }
+        ConcurrentSkipListSet<Score> scoresForLevel = orderByScore(highScores.get(level));
+        int index = 0;
         StringBuffer buffer = new StringBuffer();
-        int numOfScores = highScores.size();
-        for (int i = 0; i < numOfScores; i++) {
-            buffer.append(highScores.get(i).toString());
-            if (!(i == (numOfScores - 1))) {
+        for (Score score : scoresForLevel) {
+            if (index >= limit) {
+                return buffer.toString();
+            }
+            if (index > 0) {
                 buffer.append(",");
             }
+            buffer.append(score);
+            index++;
         }
-        System.out.println(buffer.toString());
         return buffer.toString();
     }
 
+    private ConcurrentSkipListSet<Score> orderByScore(Map<Integer, Score> scoresForLevel) {
+        ConcurrentSkipListSet<Score> scoresSkipList = new ConcurrentSkipListSet<Score>();
+
+        for (Map.Entry<Integer, Score> scoreEntry : scoresForLevel.entrySet()) {
+            scoresSkipList.add(scoreEntry.getValue());
+        }
+
+        return scoresSkipList;
+    }
+
+    @Override
+    public ArrayList<Score> getHighScores(int level, int limit) {
+        if (highScores.get(level) == null) {
+            return null;
+        }
+        ConcurrentSkipListSet<Score> scoresForLevel = orderByScore(highScores.get(level));
+        ArrayList<Score> scores = new ArrayList<Score>();
+        int index = 0;
+        for (Score score : scoresForLevel) {
+            if (index >= limit) {
+                return scores;
+            }
+            scores.add(score);
+            index++;
+        }
+        return scores;
+    }
+
+
     private HighScoresImpl() {
-        highScores = new ConcurrentHashMap<Integer, ConcurrentSkipListMap<Integer, Score>>();
+        highScores = new ConcurrentHashMap<Integer, ConcurrentHashMap<Integer, Score>>();
     }
 
 

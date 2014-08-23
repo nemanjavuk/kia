@@ -3,12 +3,11 @@ package com.neman.server.handler;
 import com.neman.utils.IOUtils;
 import com.sun.net.httpserver.Headers;
 import com.sun.net.httpserver.HttpExchange;
-import com.sun.net.httpserver.HttpHandler;
 
 import java.io.IOException;
 import java.io.OutputStream;
 
-public class NotFoundHandler implements HttpHandler {
+public class NotFoundHandler extends AbstractHandler {
     @Override
     public void handle(HttpExchange httpExchange) {
         System.out.println("going to not found handler");
