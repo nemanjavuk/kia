@@ -3,11 +3,12 @@ package com.neman.server.handler;
 import com.neman.utils.IOUtils;
 import com.sun.net.httpserver.Headers;
 import com.sun.net.httpserver.HttpExchange;
+import com.sun.net.httpserver.HttpHandler;
 
 import java.io.IOException;
 import java.io.OutputStream;
 
-public class ResourceNotFoundHandler extends AbstractHandler {
+public class ResourceNotFoundHandler implements HttpHandler {
     @Override
     public void handle(HttpExchange httpExchange) {
         Headers responseHeaders = httpExchange.getResponseHeaders();

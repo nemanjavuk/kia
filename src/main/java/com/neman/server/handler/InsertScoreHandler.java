@@ -6,14 +6,16 @@ import com.neman.session.SessionManager;
 import com.neman.utils.IOUtils;
 import com.sun.net.httpserver.Headers;
 import com.sun.net.httpserver.HttpExchange;
+import com.sun.net.httpserver.HttpHandler;
 
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.URI;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class InsertScoreHandler extends AbstractHandler {
+public class InsertScoreHandler implements HttpHandler {
 
     private final HighScores highScores;
     private final SessionManager sessionManager;
@@ -65,5 +67,27 @@ public class InsertScoreHandler extends AbstractHandler {
         }
 
         return -1; //TODO:nemanja:think about returning zeros
+    }
+
+    private String getSessionKey(HttpExchange httpExchange) {
+        return getParam(httpExchange, "sessionkey");
+    }
+
+    private int getScore(HttpExchange httpExchange) {
+        String scoreString = getParam(httpExchange, "score");
+        try {
+            return Integer.parseInt(scoreString);
+        } catch (NumberFormatException nfe) {
+            return -1;
+        }
+    }
+
+
+    private String getParam(HttpExchange httpExchange, String paramKey) {
+        Map<String, Object> params = (Map<String, Object>) httpExchange.getAttribute("parameters");
+        if (params.containsKey(paramKey)) {
+            return (String) params.get(paramKey);
+        }
+        return "";
     }
 }

@@ -48,7 +48,7 @@ public class HttpHandlerFactoryTest {
     }
 
     @Test
-    public void testHighScoreListURIReturnsHighScoresHandler() {
+    public void testHighScoreURIReturnsHighScoresHandler() {
         given(httpExchange.getRequestURI()).willReturn(URI.create("/66/highscorelist"));
         given(httpExchange.getRequestMethod()).willReturn("GET");
 
@@ -57,7 +57,7 @@ public class HttpHandlerFactoryTest {
     }
 
     @Test
-    public void testNonMatchingURIReturnsNotFoundHandler() {
+    public void testNoneMatchingURIReturnsNotFoundHandler() {
         given(httpExchange.getRequestURI()).willReturn(URI.create("/1234/something/smells/wrong"));
         given(httpExchange.getRequestMethod()).willReturn("POST");
 

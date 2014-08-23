@@ -4,6 +4,7 @@ import com.neman.data.HighScores;
 import com.neman.utils.IOUtils;
 import com.sun.net.httpserver.Headers;
 import com.sun.net.httpserver.HttpExchange;
+import com.sun.net.httpserver.HttpHandler;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -11,7 +12,7 @@ import java.net.URI;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class HighScoresHandler extends AbstractHandler {
+public class HighScoresHandler implements HttpHandler {
 
     private final HighScores highScores;
 

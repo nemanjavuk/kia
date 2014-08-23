@@ -9,7 +9,7 @@ import java.net.URI;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class HttpHandlerFactory {
+public class  HttpHandlerFactory {
     public HttpHandler createHandler(HttpExchange httpExchange, SessionManager sessionManager, HighScores highScores) {
         URI uri = httpExchange.getRequestURI();
         String method = httpExchange.getRequestMethod();
