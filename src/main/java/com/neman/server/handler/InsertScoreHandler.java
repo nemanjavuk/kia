@@ -1,7 +1,6 @@
 package com.neman.server.handler;
 
 import com.neman.data.HighScores;
-import com.neman.data.Score;
 import com.neman.session.SessionManager;
 import com.neman.utils.IOUtils;
 import com.sun.net.httpserver.Headers;
@@ -37,7 +36,7 @@ public class InsertScoreHandler implements HttpHandler {
         try {
             responseHeaders.set("Content-Type", "text/plain");
             if (userId != -1 && level != -1 && score != -1) {
-                highScores.putScore(level, new Score(userId, score));
+                highScores.putScore(level, userId, score);
                 httpExchange.sendResponseHeaders(200, 0);
                 responseBody.close();
             } else {

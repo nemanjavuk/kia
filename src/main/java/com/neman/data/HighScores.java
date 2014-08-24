@@ -7,12 +7,11 @@ import java.util.List;
  */
 public interface HighScores {
 
-    public void putScore(int level, Score score);
+    public void putScore(int level, int userId, int score);
 
     public List<Score> getHighScores(int level, int limit);
 
     public String getHighScoresCSV(int level, int limit);
 
-    public void clear();
 
 }

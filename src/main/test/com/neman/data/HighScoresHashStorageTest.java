@@ -19,26 +19,26 @@ public class HighScoresHashStorageTest {
 
     @Test
     public void testNoMoreThan15EntriesForALevel() {
-        highScores.putScore(1, new Score(3, 2));
-        highScores.putScore(1, new Score(3, 10));
-        highScores.putScore(1, new Score(3, 50));
-        highScores.putScore(1, new Score(4, 2));
-        highScores.putScore(1, new Score(4, 20));
-        highScores.putScore(1, new Score(5, 21));
-        highScores.putScore(1, new Score(6, 22));
-        highScores.putScore(1, new Score(7, 23));
-        highScores.putScore(1, new Score(8, 24));
-        highScores.putScore(1, new Score(9, 25));
-        highScores.putScore(1, new Score(10, 26));
-        highScores.putScore(1, new Score(11, 27));
-        highScores.putScore(1, new Score(12, 28));
-        highScores.putScore(1, new Score(13, 29));
-        highScores.putScore(1, new Score(14, 30));
-        highScores.putScore(1, new Score(15, 31));
-        highScores.putScore(1, new Score(16, 32));
-        highScores.putScore(1, new Score(17, 33));
-        highScores.putScore(1, new Score(18, 34));
-        highScores.putScore(1, new Score(19, 35));
+        highScores.putScore(1, 3, 2);
+        highScores.putScore(1, 3, 10);
+        highScores.putScore(1, 3, 50);
+        highScores.putScore(1, 4, 2);
+        highScores.putScore(1, 4, 20);
+        highScores.putScore(1, 5, 21);
+        highScores.putScore(1, 6, 22);
+        highScores.putScore(1, 7, 23);
+        highScores.putScore(1, 8, 24);
+        highScores.putScore(1, 9, 25);
+        highScores.putScore(1, 10, 26);
+        highScores.putScore(1, 11, 27);
+        highScores.putScore(1, 12, 28);
+        highScores.putScore(1, 13, 29);
+        highScores.putScore(1, 14, 30);
+        highScores.putScore(1, 15, 31);
+        highScores.putScore(1, 16, 32);
+        highScores.putScore(1, 17, 33);
+        highScores.putScore(1, 18, 34);
+        highScores.putScore(1, 19, 35);
 
         List<Score> scoresArr = highScores.getHighScores(1, 15);
 
