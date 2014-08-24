@@ -55,6 +55,7 @@ public class RequestRouterImpl implements RequestRouter {
 
     @Override
     public void handle(HttpExchange httpExchange) throws IOException {
+        System.out.println(this);  // ALWAYS SAME THREAD!
         HttpHandler handler = createHandler(httpExchange, sessionManager, highScores);
         handler.handle(httpExchange);
     }

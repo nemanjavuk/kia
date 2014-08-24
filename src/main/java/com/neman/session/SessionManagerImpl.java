@@ -8,7 +8,9 @@ import java.util.concurrent.ConcurrentHashMap;
  * Created by nemanja on 8/22/14.
  */
 public class SessionManagerImpl implements SessionManager {
+    //userId -> session
     private ConcurrentHashMap<Integer, Session> sessions;
+    //sessionKey -> userId mapping
     private ConcurrentHashMap<String, Integer> userIds;
 
     public SessionManagerImpl() {
@@ -34,11 +36,15 @@ public class SessionManagerImpl implements SessionManager {
 
     private String generateNewSessionKey(Integer userId) {
         String sessionKey = RandomKeyGenerator.createSessionKey();
+        //TODO:nemanja:heavy check on this
+        while (userIds.containsKey(sessionKey)) {
+            sessionKey = RandomKeyGenerator.createSessionKey();
+        }
         long now = System.currentTimeMillis();
         Session session = new SimpleSession(sessionKey, now);
         //TODO:nemanja:this should be an atomic op on both maps
-        Session updatedSimpleSession = sessions.replace(userId, session);
-        if (updatedSimpleSession != null) {
+        Session updatedSession = sessions.replace(userId, session);
+        if (updatedSession != null) {
             userIds.replace(session.getSessionKey(), userId);
         } else {
             sessions.put(userId, session);
