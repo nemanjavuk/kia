@@ -31,8 +31,9 @@ public class SessionManagerImplTest {
     @Test
     public void testTwiceInARowGeneratesSessionKeyOnce() {
         given(keyGenerator.createSessionKey()).willReturn("fdsafdsafasd");
-        sessionManager.getNewSessionKey(1234);
-        sessionManager.getExistingSessionKey(1234);
+        String sessionKey1 = sessionManager.getNewSessionKey(1234);
+        String sessionKey2 = sessionManager.getExistingSessionKey(1234);
         verify(keyGenerator, times(1)).createSessionKey();
+        Assert.assertTrue(sessionKey1.equalsIgnoreCase(sessionKey2));
     }
 }
