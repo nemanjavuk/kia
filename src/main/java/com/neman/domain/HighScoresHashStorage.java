@@ -3,26 +3,35 @@ package com.neman.domain;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * Created by nemanja on 8/21/14.
  */
 public class HighScoresHashStorage implements HighScores {
     private Map<Integer, ScoresPerLevel> highScores;
+    private Lock lock;
 
     public HighScoresHashStorage() {
         highScores = new ConcurrentHashMap<Integer, ScoresPerLevel>();
+        lock = new ReentrantLock(true);
     }
 
     @Override
     public void putScore(int level, int userId, int score) {
-        if (highScores.containsKey(level)) {
-            ScoresPerLevel scoresForLvl = highScores.get(level);
-            scoresForLvl.putScore(userId, score);
-        } else {
-            ScoresPerLevel scores = new ScoresPerLevelHashStorage();
-            scores.putScore(userId, score);
-            highScores.put(level, scores);
+        lock.lock();
+        try {
+            if (highScores.containsKey(level)) {
+                ScoresPerLevel scoresForLvl = highScores.get(level);
+                scoresForLvl.putScore(userId, score);
+            } else {
+                ScoresPerLevel scores = new ScoresPerLevelHashStorage();
+                scores.putScore(userId, score);
+                highScores.put(level, scores);
+            }
+        } finally {
+            lock.unlock();
         }
     }
 
