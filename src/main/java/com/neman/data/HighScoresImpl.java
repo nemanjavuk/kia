@@ -8,8 +8,8 @@ import java.util.concurrent.ConcurrentSkipListSet;
 /**
  * Created by nemanja on 8/21/14.
  */
-public enum HighScoresImpl implements HighScores {
-    INSTANCE;
+public class HighScoresImpl implements HighScores {
+//    INSTANCE;
 
     //make it final?
     //level -> score -> userId
@@ -88,7 +88,7 @@ public enum HighScoresImpl implements HighScores {
         highScores = new ConcurrentHashMap<Integer, ConcurrentHashMap<Integer, Score>>();
     }
 
-    HighScoresImpl() {
+    public HighScoresImpl() {
         highScores = new ConcurrentHashMap<Integer, ConcurrentHashMap<Integer, Score>>();
     }
 

@@ -24,7 +24,7 @@ public class Main {
         HttpServer server = HttpServer.create(new InetSocketAddress(PORT), 0);
 
         // Create a context
-        HttpContext context = server.createContext("/", new RequestHandler(SessionManagerImpl.getInstance(), HighScoresImpl.INSTANCE));
+        HttpContext context = server.createContext("/", new RequestHandler(new SessionManagerImpl(), new HighScoresImpl()));
 
         // Add a filter
         context.getFilters().add(new ParamsFilter());

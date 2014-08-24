@@ -6,26 +6,26 @@ import java.util.concurrent.ConcurrentHashMap;
  * Created by nemanja on 8/22/14.
  */
 public class SessionManagerImpl implements SessionManager {
-    private static SessionManagerImpl instance;
+    //    private static SessionManagerImpl instance;
     private ConcurrentHashMap<Integer, Session> sessions;
     private ConcurrentHashMap<String, Integer> userIds;
 
-    private SessionManagerImpl() {
+    public SessionManagerImpl() {
         sessions = new ConcurrentHashMap<Integer, Session>();
         userIds = new ConcurrentHashMap<String, Integer>();
     }
 
-    //double check approach to creating Singleton
-    public static SessionManagerImpl getInstance() {
-        if (null == instance) {
-            synchronized (SessionManager.class) {
-                if (null == instance) {
-                    instance = new SessionManagerImpl();
-                }
-            }
-        }
-        return instance;
-    }
+//    //double check approach to creating Singleton
+//    public static SessionManagerImpl getInstance() {
+//        if (null == instance) {
+//            synchronized (SessionManager.class) {
+//                if (null == instance) {
+//                    instance = new SessionManagerImpl();
+//                }
+//            }
+//        }
+//        return instance;
+//    }
 
     @Override
     public String getSessionKey(Integer userId) {
