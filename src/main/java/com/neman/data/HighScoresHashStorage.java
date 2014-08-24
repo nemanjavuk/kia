@@ -8,10 +8,7 @@ import java.util.concurrent.ConcurrentSkipListSet;
 /**
  * Created by nemanja on 8/21/14.
  */
-public class HighScoresImpl implements HighScores {
-//    INSTANCE;
-
-    //make it final?
+public class HighScoresHashStorage implements HighScores {
     //level -> score -> userId
     private ConcurrentHashMap<Integer, ConcurrentHashMap<Integer, Score>> highScores;
 
@@ -88,7 +85,7 @@ public class HighScoresImpl implements HighScores {
         highScores = new ConcurrentHashMap<Integer, ConcurrentHashMap<Integer, Score>>();
     }
 
-    public HighScoresImpl() {
+    public HighScoresHashStorage() {
         highScores = new ConcurrentHashMap<Integer, ConcurrentHashMap<Integer, Score>>();
     }
 

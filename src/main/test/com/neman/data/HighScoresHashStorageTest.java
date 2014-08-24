@@ -9,12 +9,12 @@ import java.util.List;
 /**
  * Created by nemanja on 8/22/14.
  */
-public class HighScoresTest {
+public class HighScoresHashStorageTest {
     private HighScores highScores;
 
     @Before
     public void setUp() {
-        highScores = new HighScoresImpl();
+        highScores = new HighScoresHashStorage();
     }
 
     @Test

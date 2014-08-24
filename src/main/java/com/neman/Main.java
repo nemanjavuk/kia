@@ -1,6 +1,6 @@
 package com.neman;
 
-import com.neman.data.HighScoresImpl;
+import com.neman.data.HighScoresHashStorage;
 import com.neman.server.filter.ParamsFilter;
 import com.neman.server.handler.RequestHandler;
 import com.neman.session.SessionManagerImpl;
@@ -24,7 +24,7 @@ public class Main {
         HttpServer server = HttpServer.create(new InetSocketAddress(PORT), 0);
 
         // Create a context
-        HttpContext context = server.createContext("/", new RequestHandler(new SessionManagerImpl(), new HighScoresImpl()));
+        HttpContext context = server.createContext("/", new RequestHandler(new SessionManagerImpl(), new HighScoresHashStorage()));
 
         // Add a filter
         context.getFilters().add(new ParamsFilter());
