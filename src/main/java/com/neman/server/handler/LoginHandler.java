@@ -37,7 +37,11 @@ public class LoginHandler implements HttpHandler {
 
     private String login(HttpExchange httpExchange) {
         int userId = getUserId(httpExchange);
-        return sessionManager.getSessionKey(userId);
+        String sessionKey = sessionManager.getExistingSessionKey(userId);
+        if (sessionKey == null) {
+            sessionKey = sessionManager.getNewSessionKey(userId);
+        }
+        return sessionKey;
     }
 
     public int getUserId(HttpExchange httpExchange) {

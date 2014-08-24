@@ -5,7 +5,9 @@ package com.neman.session;
  */
 public interface SessionManager {
 
-    public String getSessionKey(Integer userId);
+    public String getExistingSessionKey(Integer userId);
+
+    public String getNewSessionKey(Integer userId);
 
     public int getUserId(String sessionKey);
 }

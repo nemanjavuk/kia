@@ -13,5 +13,4 @@ public interface HighScores {
 
     public String getHighScoresCSV(int level, int limit);
 
-
 }

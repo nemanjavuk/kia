@@ -6,14 +6,15 @@ import java.security.SecureRandom;
 /**
  * Created by nemanja on 8/22/14.
  */
-public final class RandomKeyGenerator {
+public class RandomKeyGenerator {
 
-    private RandomKeyGenerator() {
+    private final SecureRandom random;
+
+    public RandomKeyGenerator() {
+        random = new SecureRandom();
     }
 
-    private static final SecureRandom random = new SecureRandom();
-
-    public static String createSessionKey() {
+    public String createSessionKey() {
         return new BigInteger(130, random).toString(32);
     }
 

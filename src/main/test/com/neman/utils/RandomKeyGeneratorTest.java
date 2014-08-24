@@ -1,23 +1,32 @@
 package com.neman.utils;
 
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 /**
  * Created by nemanja on 8/24/14.
  */
 public class RandomKeyGeneratorTest {
+
+    private RandomKeyGenerator keyGenerator;
+
+    @Before
+    public void setUp() {
+        keyGenerator = new RandomKeyGenerator();
+    }
+
     @Test
     public void testGenerateKeyLengthIs() {
-        String key = RandomKeyGenerator.createSessionKey();
+        String key = keyGenerator.createSessionKey();
         Assert.assertNotNull(key);
         Assert.assertEquals(26, key.length());
     }
 
     @Test
     public void testSequentiallyGeneratedKeysAreNotTheSame() {
-        String key1 = RandomKeyGenerator.createSessionKey();
-        String key2 = RandomKeyGenerator.createSessionKey();
+        String key1 = keyGenerator.createSessionKey();
+        String key2 = keyGenerator.createSessionKey();
 
         Assert.assertNotNull(key1);
         Assert.assertNotNull(key2);

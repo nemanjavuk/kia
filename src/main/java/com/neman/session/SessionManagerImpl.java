@@ -13,36 +13,34 @@ public class SessionManagerImpl implements SessionManager {
     //sessionKey -> userId mapping
     private ConcurrentHashMap<String, Integer> userIds;
 
-    public SessionManagerImpl() {
+    private RandomKeyGenerator keyGenerator;
+
+    public SessionManagerImpl(RandomKeyGenerator keyGenerator) {
         sessions = new ConcurrentHashMap<Integer, Session>();
         userIds = new ConcurrentHashMap<String, Integer>();
+        this.keyGenerator = keyGenerator;
     }
 
 
     @Override
-    public String getSessionKey(Integer userId) {
+    public String getExistingSessionKey(Integer userId) {
         if (sessions.containsKey(userId)) {
             Session session = sessions.get(userId);
             if (!session.isExpired()) {
                 return session.getSessionKey();
             } else {
-                return generateNewSessionKey(userId);
+                return null;
             }
         } else {
-            return generateNewSessionKey(userId);
+            return null;
         }
     }
 
-
-    private String generateNewSessionKey(Integer userId) {
-        String sessionKey = RandomKeyGenerator.createSessionKey();
-        //TODO:nemanja:heavy check on this
-        while (userIds.containsKey(sessionKey)) {
-            sessionKey = RandomKeyGenerator.createSessionKey();
-        }
+    @Override
+    public String getNewSessionKey(Integer userId) {
+        String sessionKey = keyGenerator.createSessionKey();
         long now = System.currentTimeMillis();
         Session session = new SimpleSession(sessionKey, now);
-        //TODO:nemanja:this should be an atomic op on both maps
         Session updatedSession = sessions.replace(userId, session);
         if (updatedSession != null) {
             userIds.replace(session.getSessionKey(), userId);

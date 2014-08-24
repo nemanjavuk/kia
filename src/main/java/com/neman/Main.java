@@ -4,6 +4,7 @@ import com.neman.domain.HighScoresHashStorage;
 import com.neman.server.filter.ParamsFilter;
 import com.neman.server.handler.RequestRouterImpl;
 import com.neman.session.SessionManagerImpl;
+import com.neman.utils.RandomKeyGenerator;
 import com.sun.net.httpserver.HttpContext;
 import com.sun.net.httpserver.HttpServer;
 
@@ -23,8 +24,11 @@ public class Main {
         // Create an http main.java.com.neman.server
         HttpServer server = HttpServer.create(new InetSocketAddress(PORT), 0);
 
+        //Create a session key generator
+        //with current implementation this can be a time consuming process
+        RandomKeyGenerator keyGenerator = new RandomKeyGenerator();
         // Create a context
-        HttpContext context = server.createContext("/", new RequestRouterImpl(new SessionManagerImpl(), new HighScoresHashStorage()));
+        HttpContext context = server.createContext("/", new RequestRouterImpl(new SessionManagerImpl(keyGenerator), new HighScoresHashStorage()));
 
         // Add a filter
         context.getFilters().add(new ParamsFilter());
