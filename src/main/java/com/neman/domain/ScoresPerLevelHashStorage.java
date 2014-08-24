@@ -1,4 +1,4 @@
-package com.neman.data;
+package com.neman.domain;
 
 import java.util.ArrayList;
 import java.util.List;

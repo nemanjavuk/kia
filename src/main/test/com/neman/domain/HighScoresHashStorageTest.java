@@ -1,4 +1,4 @@
-package com.neman.data;
+package com.neman.domain;
 
 import org.junit.Assert;
 import org.junit.Before;

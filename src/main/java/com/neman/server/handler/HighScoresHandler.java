@@ -1,6 +1,6 @@
 package com.neman.server.handler;
 
-import com.neman.data.HighScores;
+import com.neman.domain.HighScores;
 import com.neman.utils.IOUtils;
 import com.sun.net.httpserver.Headers;
 import com.sun.net.httpserver.HttpExchange;

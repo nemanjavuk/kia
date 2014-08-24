@@ -1,4 +1,4 @@
-package com.neman.data;
+package com.neman.domain;
 
 /**
  * Created by nemanja on 8/21/14.

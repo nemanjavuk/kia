@@ -1,6 +1,6 @@
 package com.neman;
 
-import com.neman.data.HighScoresHashStorage;
+import com.neman.domain.HighScoresHashStorage;
 import com.neman.server.filter.ParamsFilter;
 import com.neman.server.handler.RequestRouterImpl;
 import com.neman.session.SessionManagerImpl;
