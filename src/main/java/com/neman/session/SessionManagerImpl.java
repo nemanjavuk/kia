@@ -1,5 +1,7 @@
 package com.neman.session;
 
+import com.neman.utils.RandomKeyGenerator;
+
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -18,9 +20,9 @@ public class SessionManagerImpl implements SessionManager {
     @Override
     public String getSessionKey(Integer userId) {
         if (sessions.containsKey(userId)) {
-            Session simpleSession = sessions.get(userId);
-            if (!simpleSession.isExpired()) {
-                return simpleSession.getSessionKey();
+            Session session = sessions.get(userId);
+            if (!session.isExpired()) {
+                return session.getSessionKey();
             } else {
                 return generateNewSessionKey(userId);
             }
@@ -31,18 +33,18 @@ public class SessionManagerImpl implements SessionManager {
 
 
     private String generateNewSessionKey(Integer userId) {
-        String sessionKey = SessionKeyGenerator.getId();
+        String sessionKey = RandomKeyGenerator.createSessionKey();
         long now = System.currentTimeMillis();
-        Session simpleSession = new SimpleSession(sessionKey, now);
+        Session session = new SimpleSession(sessionKey, now);
         //TODO:nemanja:this should be an atomic op on both maps
-        Session updatedSimpleSession = sessions.replace(userId, simpleSession);
+        Session updatedSimpleSession = sessions.replace(userId, session);
         if (updatedSimpleSession != null) {
-            userIds.replace(simpleSession.getSessionKey(), userId);
+            userIds.replace(session.getSessionKey(), userId);
         } else {
-            sessions.put(userId, simpleSession);
-            userIds.put(simpleSession.getSessionKey(), userId);
+            sessions.put(userId, session);
+            userIds.put(session.getSessionKey(), userId);
         }
-        return simpleSession.getSessionKey();
+        return session.getSessionKey();
     }
 
     @Override
