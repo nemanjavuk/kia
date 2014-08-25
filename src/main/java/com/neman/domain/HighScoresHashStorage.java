@@ -10,7 +10,7 @@ import java.util.concurrent.locks.ReentrantLock;
  * Created by nemanja on 8/21/14.
  */
 public class HighScoresHashStorage implements HighScores {
-    private ConcurrentHashMap<Integer, ScoresPerLevel> highScores;
+    private Map<Integer, ScoresPerLevel> highScores;
     private Lock lock;
 
     public HighScoresHashStorage() {
