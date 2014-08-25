@@ -10,7 +10,7 @@ import java.util.concurrent.locks.ReentrantLock;
  * Created by nemanja on 8/21/14.
  */
 public class HighScoresHashStorage implements HighScores {
-    private Map<Integer, ScoresPerLevel> highScores;
+    private ConcurrentHashMap<Integer, ScoresPerLevel> highScores;
     private Lock lock;
 
     public HighScoresHashStorage() {
@@ -20,19 +20,21 @@ public class HighScoresHashStorage implements HighScores {
 
     @Override
     public void putScore(int level, int userId, int score) {
-        lock.lock();
-        try {
-            if (highScores.containsKey(level)) {
-                ScoresPerLevel scoresForLvl = highScores.get(level);
-                scoresForLvl.putScore(userId, score);
-            } else {
-                ScoresPerLevel scores = new ScoresPerLevelHashStorage();
-                scores.putScore(userId, score);
-                highScores.put(level, scores);
+        if (!highScores.containsKey(level)) {
+            lock.lock();
+            try {
+                if (!highScores.containsKey(level)) {
+                    ScoresPerLevel scores = new ScoresPerLevelHashStorage();
+                    scores.putScore(userId, score);
+                    highScores.put(level, scores);
+                    return;
+                }
+            } finally {
+                lock.unlock();
             }
-        } finally {
-            lock.unlock();
         }
+        ScoresPerLevel scoresForLvl = highScores.get(level);
+        scoresForLvl.putScore(userId, score);
     }
 
     @Override
