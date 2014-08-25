@@ -36,10 +36,10 @@ public class Main {
         // Set an Executor for the multi-threading with fixed amount of 10 threads
         server.setExecutor(Executors.newFixedThreadPool(10));
 
-        // Start the main.java.com.neman.server
+        // Start the server
         server.start();
 
-        System.out.println("The com.neman.server is started!");
+        System.out.println("The server is started on port " + PORT);
 
 
     }
