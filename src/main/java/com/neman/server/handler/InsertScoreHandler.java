@@ -14,6 +14,9 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Created by nemanja.
+ */
 public class InsertScoreHandler implements HttpHandler {
 
     private final HighScores highScores;
@@ -65,7 +68,7 @@ public class InsertScoreHandler implements HttpHandler {
             }
         }
 
-        return -1; //TODO:nemanja:think about returning zeros
+        return -1;
     }
 
     private String getSessionKey(HttpExchange httpExchange) {

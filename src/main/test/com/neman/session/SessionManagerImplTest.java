@@ -9,7 +9,7 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.*;
 
 /**
- * Created by nemanja on 8/24/14.
+ * Created by nemanja.
  */
 public class SessionManagerImplTest {
 

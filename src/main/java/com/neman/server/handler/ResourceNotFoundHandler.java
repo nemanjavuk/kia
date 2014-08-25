@@ -8,6 +8,9 @@ import com.sun.net.httpserver.HttpHandler;
 import java.io.IOException;
 import java.io.OutputStream;
 
+/**
+ * Created by nemanja.
+ */
 public class ResourceNotFoundHandler implements HttpHandler {
     @Override
     public void handle(HttpExchange httpExchange) {
@@ -20,7 +23,6 @@ public class ResourceNotFoundHandler implements HttpHandler {
         } catch (IOException ioe) {
             IOUtils.closeQuietly(responseBody);
         }
-        //TODO:nemanja:some appropriate message but I believe the status code is enough for now
     }
 }
 

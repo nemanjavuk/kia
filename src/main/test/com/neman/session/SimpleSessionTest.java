@@ -4,7 +4,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 /**
- * Created by nemanja on 8/24/14.
+ * Created by nemanja.
  */
 public class SimpleSessionTest {
 

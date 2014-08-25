@@ -7,7 +7,7 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
- * Created by nemanja on 8/21/14.
+ * Created by nemanja.
  */
 public class HighScoresHashStorage implements HighScores {
     private Map<Integer, ScoresPerLevel> highScores;
@@ -18,6 +18,10 @@ public class HighScoresHashStorage implements HighScores {
         lock = new ReentrantLock(true);
     }
 
+    //this is a critical concurrent place in code for cases when two threads wish to enter a score for a level
+    //that doesn't exist yet. For that reason we need to temporarily lock the access of creating a new level.
+    //This decision is made on assumption that it will happen only a couple of times per level, and that when a
+    //level already exists everything will go smoothly.
     @Override
     public void putScore(int level, int userId, int score) {
         if (!highScores.containsKey(level)) {

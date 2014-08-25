@@ -5,7 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * Created by nemanja on 8/24/14.
+ * Created by nemanja.
  */
 public class RandomKeyGeneratorTest {
 

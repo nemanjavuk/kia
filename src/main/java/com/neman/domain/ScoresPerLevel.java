@@ -3,7 +3,7 @@ package com.neman.domain;
 import java.util.List;
 
 /**
- * Created by nemanja on 8/24/14.
+ * Created by nemanja.
  */
 public interface ScoresPerLevel {
     public void putScore(int userId, int score);

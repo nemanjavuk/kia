@@ -8,7 +8,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListSet;
 
 /**
- * Created by nemanja on 8/24/14.
+ * Created by nemanja.
  */
 public class ScoresPerLevelHashStorage implements ScoresPerLevel {
 
@@ -18,6 +18,10 @@ public class ScoresPerLevelHashStorage implements ScoresPerLevel {
         scoresForLevel = new ConcurrentHashMap<Integer, Integer>();
     }
 
+    //the following assumption is made here and that is that it's highly improbable for a client with the same userId
+    //simultaneously submit 2 scores that will cause one overriding the other. In that case, since it is the same user,
+    //we will accept either one because we don't know which insert has a higher priority: the one with higher score or
+    //the one with some other important property.
     @Override
     public void putScore(int userId, int score) {
         if (scoresForLevel.containsKey(userId)) {

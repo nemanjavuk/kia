@@ -14,6 +14,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Created by nemanja.
+ */
 public class ParamsFilter extends Filter {
 
     @Override

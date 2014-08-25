@@ -1,9 +1,5 @@
 package com.neman.utils;
 
-/**
- * Created by nemanja on 8/22/14.
- */
-
 
 import java.io.*;
 import java.net.ServerSocket;
@@ -12,7 +8,7 @@ import java.nio.channels.Selector;
 
 
 /**
- * Origin of code: apache commons-io
+ * Kindly borrowed from apache commons-io to prevent memory leaks from OutputStream
  */
 public class IOUtils {
 

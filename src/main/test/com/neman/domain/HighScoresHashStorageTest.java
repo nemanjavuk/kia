@@ -7,7 +7,7 @@ import org.junit.Test;
 import java.util.List;
 
 /**
- * Created by nemanja on 8/22/14.
+ * Created by nemanja.
  */
 public class HighScoresHashStorageTest {
     private HighScores highScores;

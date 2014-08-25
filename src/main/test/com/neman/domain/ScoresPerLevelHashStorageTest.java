@@ -7,7 +7,7 @@ import org.junit.Test;
 import java.util.List;
 
 /**
- * Created by nemanja on 8/24/14.
+ * Created by nemanja.
  */
 public class ScoresPerLevelHashStorageTest {
     private ScoresPerLevel scoresPerLevel;

@@ -14,6 +14,9 @@ import java.net.URI;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
 
+/**
+ * Created by nemanja.
+ */
 public class RequestRouterImplTest {
 
     private RequestRouter requestRouterImpl;

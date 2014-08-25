@@ -4,7 +4,7 @@ import java.math.BigInteger;
 import java.security.SecureRandom;
 
 /**
- * Created by nemanja on 8/22/14.
+ * Created by nemanja.
  */
 public class RandomKeyGenerator {
 

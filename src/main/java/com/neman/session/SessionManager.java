@@ -1,7 +1,7 @@
 package com.neman.session;
 
 /**
- * Created by nemanja on 8/22/14.
+ * Created by nemanja.
  */
 public interface SessionManager {
 

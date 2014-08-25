@@ -12,6 +12,9 @@ import java.net.URI;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Created by nemanja.
+ */
 public class HighScoresHandler implements HttpHandler {
 
     private final HighScores highScores;
@@ -61,6 +64,6 @@ public class HighScoresHandler implements HttpHandler {
             }
         }
 
-        return -1; //TODO:nemanja:think about returning zeros
+        return -1;
     }
 }

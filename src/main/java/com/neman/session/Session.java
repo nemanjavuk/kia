@@ -1,7 +1,7 @@
 package com.neman.session;
 
 /**
- * Created by nemanja on 8/24/14.
+ * Created by nemanja.
  */
 public interface Session {
     public String getSessionKey();

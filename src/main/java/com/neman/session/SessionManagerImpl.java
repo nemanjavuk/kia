@@ -5,10 +5,10 @@ import com.neman.utils.RandomKeyGenerator;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * Created by nemanja on 8/22/14.
+ * Created by nemanja.
  */
 public class SessionManagerImpl implements SessionManager {
-    //userId -> session
+    //userId -> session mapping
     private ConcurrentHashMap<Integer, Session> sessions;
     //sessionKey -> userId mapping
     private ConcurrentHashMap<String, Integer> userIds;

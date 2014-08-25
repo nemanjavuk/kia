@@ -12,6 +12,9 @@ import java.net.URI;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Created by nemanja.
+ */
 public class LoginHandler implements HttpHandler {
 
     private final SessionManager sessionManager;

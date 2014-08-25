@@ -1,10 +1,9 @@
 package com.neman.session;
 
 /**
- * Created by nemanja on 8/22/14.
+ * Created by nemanja.
  */
 public class SimpleSession implements Session {
-    //TODO:nemanja:extract this up somewhere
     private final static long SESSION_DURATION = 600000; //10 minutes
 
     private String sessionKey;

@@ -1,7 +1,7 @@
 package com.neman.domain;
 
 /**
- * Created by nemanja on 8/21/14.
+ * Created by nemanja.
  */
 public class Score implements Comparable<Score> {
 
